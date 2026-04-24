@@ -1,0 +1,13 @@
+{
+  "name": "vishal-landing-page",
+  "version": "1.0.0",
+  "description": "Responsive landing page for Vishal",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
