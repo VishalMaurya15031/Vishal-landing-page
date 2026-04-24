@@ -24,22 +24,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile menu toggle (simple animation)
     const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
     let isMenuOpen = false;
     
+    const toggleMenu = () => {
+        isMenuOpen = !isMenuOpen;
+        const spans = mobileBtn.querySelectorAll('span');
+        
+        if (isMenuOpen) {
+            spans[0].style.transform = 'translateY(4px) rotate(45deg)';
+            spans[1].style.transform = 'translateY(-4px) rotate(-45deg)';
+            if(mobileOverlay) mobileOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.transform = 'none';
+            if(mobileOverlay) mobileOverlay.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+    };
+
     if (mobileBtn) {
-        mobileBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            const spans = mobileBtn.querySelectorAll('span');
-            
-            if (isMenuOpen) {
-                spans[0].style.transform = 'translateY(4px) rotate(45deg)';
-                spans[1].style.transform = 'translateY(-4px) rotate(-45deg)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.transform = 'none';
-            }
-            
-            // In a full implementation, this would open a mobile nav overlay
+        mobileBtn.addEventListener('click', toggleMenu);
+    }
+    
+    if (mobileLinks) {
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(isMenuOpen) toggleMenu();
+            });
         });
     }
 
